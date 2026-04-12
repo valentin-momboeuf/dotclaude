@@ -46,6 +46,10 @@ Installed from [claude-plugins-official](https://github.com/anthropics/claude-pl
 | context7 | Fetch up-to-date library documentation |
 | github | GitHub integration |
 | obsidian | Work with Obsidian vault files (.md, .base, .canvas) |
+| skill-creator | Create and edit custom skills |
+| commit-commands | Git commit workflow helpers |
+| claude-code-setup | Claude Code setup and configuration helpers |
+| pr-review-toolkit | Pull request review toolkit |
 
 ## Statusline
 
