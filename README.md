@@ -6,11 +6,13 @@ My personal [Claude Code](https://claude.ai/code) configuration — plugins, glo
 
 ```
 dotclaude/
-├── CLAUDE.md       — Global context loaded in every Claude Code session
-├── settings.json   — Plugins and statusline config
-├── skills/         — Custom skills (coming)
-├── install.sh      — Installer for Linux / macOS / WSL
-└── install.ps1     — Installer for Windows (native)
+├── CLAUDE.md              — Global context loaded in every Claude Code session
+├── settings.json          — Plugins and statusline config
+├── ccstatusline/
+│   └── settings.json      — Statusline layout (model, context, git, usage)
+├── skills/                — Custom skills (coming)
+├── install.sh             — Installer for Linux / macOS / WSL
+└── install.ps1            — Installer for Windows (native)
 ```
 
 ## Install
@@ -53,4 +55,8 @@ Installed from [claude-plugins-official](https://github.com/anthropics/claude-pl
 
 ## Statusline
 
-Uses [ccstatusline](https://github.com/roovet/ccstatusline) via `npx -y ccstatusline@latest`.
+Uses [ccstatusline](https://github.com/sirmalloc/ccstatusline) via `npx -y ccstatusline@latest`.
+
+Two lines:
+- **Line 1**: model · context % · session cost · session clock
+- **Line 2**: git branch · git worktree · reset timer · weekly cost · weekly reset timer

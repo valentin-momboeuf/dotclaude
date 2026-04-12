@@ -75,6 +75,11 @@ if [[ -d "${REPO_DIR}/skills" ]]; then
     done
 fi
 
+# ── ccstatusline ─────────────────────────────────────────────────────────────
+CCSTATUSLINE_DIR="${HOME}/.config/ccstatusline"
+mkdir -p "${CCSTATUSLINE_DIR}"
+link_file "${REPO_DIR}/ccstatusline/settings.json" "${CCSTATUSLINE_DIR}/settings.json"
+
 echo ""
 log_ok "dotclaude installed successfully."
 echo ""

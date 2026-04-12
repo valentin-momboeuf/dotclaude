@@ -48,6 +48,11 @@ if (Test-Path $SkillsDir) {
     }
 }
 
+# ── ccstatusline ─────────────────────────────────────────────────────────────
+$CcStatuslineDir = Join-Path $env:USERPROFILE ".config\ccstatusline"
+New-Item -ItemType Directory -Force -Path $CcStatuslineDir | Out-Null
+Link-File "$RepoDir\ccstatusline\settings.json" "$CcStatuslineDir\settings.json"
+
 Write-Host ""
 Log-Ok "dotclaude installed successfully."
 Write-Host ""
