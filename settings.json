@@ -20,6 +20,18 @@
     "gopls-lsp@claude-plugins-official": true,
     "claude-mem@thedotmack": true
   },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/fin-de-session.sh"
+          }
+        ]
+      }
+    ]
+  },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
       "source": {
