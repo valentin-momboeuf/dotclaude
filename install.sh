@@ -66,12 +66,22 @@ link_file() {
 link_file "${REPO_DIR}/CLAUDE.md"     "${CLAUDE_DIR}/CLAUDE.md"
 link_file "${REPO_DIR}/settings.json" "${CLAUDE_DIR}/settings.json"
 
-# Link skills
+# Link skills — both flat .md files and directory-format skills (SKILL.md + resources)
 if [[ -d "${REPO_DIR}/skills" ]]; then
+    # Flat .md skills: skills/my-skill.md → ~/.claude/skills/my-skill.md
     for skill_file in "${REPO_DIR}/skills"/*.md; do
         [[ -e "${skill_file}" ]] || continue
         skill_name="$(basename "${skill_file}")"
         link_file "${skill_file}" "${CLAUDE_DIR}/skills/${skill_name}"
+    done
+
+    # Directory skills: skills/my-skill/SKILL.md → ~/.claude/skills/my-skill/
+    for skill_dir in "${REPO_DIR}/skills"/*/; do
+        [[ -d "${skill_dir}" ]] || continue
+        [[ -f "${skill_dir}/SKILL.md" ]] || continue
+        skill_dir="${skill_dir%/}"
+        skill_name="$(basename "${skill_dir}")"
+        link_file "${skill_dir}" "${CLAUDE_DIR}/skills/${skill_name}"
     done
 fi
 

@@ -40,10 +40,18 @@ function Link-File {
 Link-File "$RepoDir\CLAUDE.md"     "$ClaudeDir\CLAUDE.md"
 Link-File "$RepoDir\settings.json" "$ClaudeDir\settings.json"
 
-# Link skills
+# Link skills — both flat .md files and directory-format skills (SKILL.md + resources)
 $SkillsDir = Join-Path $RepoDir "skills"
 if (Test-Path $SkillsDir) {
-    Get-ChildItem "$SkillsDir\*.md" | ForEach-Object {
+    # Flat .md skills
+    Get-ChildItem "$SkillsDir\*.md" -File | ForEach-Object {
+        Link-File $_.FullName "$ClaudeDir\skills\$($_.Name)"
+    }
+
+    # Directory skills: must contain SKILL.md
+    Get-ChildItem $SkillsDir -Directory | Where-Object {
+        Test-Path (Join-Path $_.FullName "SKILL.md")
+    } | ForEach-Object {
         Link-File $_.FullName "$ClaudeDir\skills\$($_.Name)"
     }
 }
