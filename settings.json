@@ -1,4 +1,16 @@
 {
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/fin-de-session.sh"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "npx -y ccstatusline@latest",
@@ -18,19 +30,12 @@
     "claude-code-setup@claude-plugins-official": true,
     "pr-review-toolkit@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
-    "claude-mem@thedotmack": true
-  },
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/fin-de-session.sh"
-          }
-        ]
-      }
-    ]
+    "claude-mem@thedotmack": true,
+    "elastic-cloud@elastic-agent-skills": true,
+    "elastic-elasticsearch@elastic-agent-skills": true,
+    "elastic-kibana@elastic-agent-skills": true,
+    "elastic-observability@elastic-agent-skills": true,
+    "elastic-security@elastic-agent-skills": true
   },
   "extraKnownMarketplaces": {
     "obsidian-skills": {
@@ -43,6 +48,12 @@
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "elastic-agent-skills": {
+      "source": {
+        "source": "github",
+        "repo": "elastic/agent-skills"
       }
     }
   }
