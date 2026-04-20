@@ -56,5 +56,9 @@
         "repo": "elastic/agent-skills"
       }
     }
+  },
+  "skipAutoPermissionPrompt": true,
+  "permissions": {
+    "defaultMode": "auto"
   }
 }
