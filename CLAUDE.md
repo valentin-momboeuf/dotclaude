@@ -57,3 +57,5 @@ projet/
 ├── deploy.md         — CI/CD et infrastructure
 └── notes/            — Dev logs et ADR en cours
 ```
+
+@RTK.md
