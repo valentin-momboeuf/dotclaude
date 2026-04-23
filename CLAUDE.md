@@ -48,6 +48,14 @@ Langages : Python, Bash
 3. Pas de code production-ready présenté sans tests (ou avertissement explicite)
 4. Lors d'une revue : logique → bugs → lisibilité → sécurité → tests
 
+### Édition de code existant
+- Ne pas "améliorer" le code adjacent (style, commentaires, formatage) non demandé
+- Ne pas refactorer ce qui n'est pas cassé
+- Respecter le style existant même si discutable
+- Code mort non lié aux changements : signaler, ne pas supprimer
+- Supprimer uniquement les imports/variables rendus orphelins **par** tes changements
+- Règle de vérification : chaque ligne modifiée doit tracer directement à la demande
+
 ## Structure de projet attendue
 
 ```
