@@ -1,6 +1,6 @@
 # dotclaude
 
-My personal [Claude Code](https://claude.ai/code) setup — global context, plugins, and statusline. This repo presents and tracks the tools I use; it is not meant to be installed on another machine.
+My personal [Claude Code](https://claude.ai/code) setup — global context, plugins, and statusline. This repo presents and tracks the tools I use.
 
 ## Layout
 
