@@ -1,42 +1,24 @@
 # dotclaude
 
-My personal [Claude Code](https://claude.ai/code) configuration — plugins, global context, and skills.
+My personal [Claude Code](https://claude.ai/code) setup — global context, plugins, and statusline. This repo presents and tracks the tools I use; it is not meant to be installed on another machine.
 
-## Contents
+## Layout
 
 ```
 dotclaude/
 ├── CLAUDE.md              — Global context loaded in every Claude Code session
-├── settings.json          — Plugins and statusline config
-├── ccstatusline/
-│   └── settings.json      — Statusline layout (model, context, git, usage)
-├── skills/                — Custom skills (coming)
-├── install.sh             — Installer for Linux / macOS / WSL
-└── install.ps1            — Installer for Windows (native)
+├── settings.json          — Plugins, statusline, hooks, permissions
+├── hooks/
+│   └── fin-de-session.sh  — UserPromptSubmit hook: end-of-session workflow
+└── ccstatusline/
+    └── settings.json      — Statusline layout (model, context, git, usage)
 ```
-
-## Install
-
-**Linux / macOS / WSL**
-```bash
-git clone https://github.com/valentin-momboeuf/dotclaude ~/.dotclaude
-cd ~/.dotclaude
-chmod +x install.sh
-./install.sh
-```
-
-**Windows (native PowerShell — requires Developer Mode or admin)**
-```powershell
-git clone https://github.com/valentin-momboeuf/dotclaude $HOME\.dotclaude
-cd $HOME\.dotclaude
-.\install.ps1
-```
-
-The installer symlinks `CLAUDE.md` and `settings.json` into `~/.claude/` (or `%APPDATA%\Claude\` on Windows native). Existing files are backed up with a `.bak` extension.
 
 ## Plugins
 
-Installed from [claude-plugins-official](https://github.com/anthropics/claude-plugins-official) and [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills):
+Sourced from four marketplaces.
+
+### [claude-plugins-official](https://github.com/anthropics/claude-plugins-official)
 
 | Plugin | Purpose |
 |---|---|
@@ -47,11 +29,33 @@ Installed from [claude-plugins-official](https://github.com/anthropics/claude-pl
 | frontend-design | Production-grade UI components |
 | context7 | Fetch up-to-date library documentation |
 | github | GitHub integration |
-| obsidian | Work with Obsidian vault files (.md, .base, .canvas) |
 | skill-creator | Create and edit custom skills |
 | commit-commands | Git commit workflow helpers |
 | claude-code-setup | Claude Code setup and configuration helpers |
 | pr-review-toolkit | Pull request review toolkit |
+| gopls-lsp | Go language server integration |
+
+### [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills)
+
+| Plugin | Purpose |
+|---|---|
+| obsidian | Work with Obsidian vault files (.md, .base, .canvas) |
+
+### [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+
+| Plugin | Purpose |
+|---|---|
+| claude-mem | Cross-session memory and timeline reports |
+
+### [elastic/agent-skills](https://github.com/elastic/agent-skills)
+
+| Plugin | Purpose |
+|---|---|
+| elastic-cloud | Manage Elastic Cloud Serverless projects |
+| elastic-elasticsearch | Authn/authz, audit, ingest, ES\|QL |
+| elastic-kibana | Dashboards, alerting rules, connectors, audit |
+| elastic-observability | Logs search, SLOs, EDOT instrumentation, LLM obs |
+| elastic-security | Detection rules, alert triage, case management |
 
 ## Statusline
 
@@ -60,3 +64,7 @@ Uses [ccstatusline](https://github.com/sirmalloc/ccstatusline) via `npx -y ccsta
 Two lines:
 - **Line 1**: model · context % · session cost · session clock
 - **Line 2**: git branch · git worktree · reset timer · weekly cost · weekly reset timer
+
+## Hooks
+
+- **`fin-de-session.sh`** — `UserPromptSubmit` hook. When the prompt contains "fin de session", injects a system reminder that runs the end-of-session workflow: update memory, write an Obsidian note if relevant, commit/push the current project, then sync `dotclaude` and `dotclaude-private`.
