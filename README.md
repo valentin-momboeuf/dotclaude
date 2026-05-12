@@ -16,7 +16,7 @@ dotclaude/
 
 ## Plugins
 
-Sourced from four marketplaces.
+Sourced from five marketplaces.
 
 ### [claude-plugins-official](https://github.com/anthropics/claude-plugins-official)
 
@@ -32,7 +32,9 @@ Sourced from four marketplaces.
 | skill-creator | Create and edit custom skills |
 | commit-commands | Git commit workflow helpers |
 | claude-code-setup | Claude Code setup and configuration helpers |
+| claude-md-management | Audit and improve CLAUDE.md files |
 | pr-review-toolkit | Pull request review toolkit |
+| security-guidance | Security review guidance |
 | gopls-lsp | Go language server integration |
 
 ### [kepano/obsidian-skills](https://github.com/kepano/obsidian-skills)
@@ -40,6 +42,12 @@ Sourced from four marketplaces.
 | Plugin | Purpose |
 |---|---|
 | obsidian | Work with Obsidian vault files (.md, .base, .canvas) |
+
+### [AgriciDaniel/claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian)
+
+| Plugin | Purpose |
+|---|---|
+| claude-obsidian | Additional Obsidian vault tooling |
 
 ### [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
 
@@ -67,4 +75,13 @@ Two lines:
 
 ## Hooks
 
-- **`fin-de-session.sh`** — `UserPromptSubmit` hook. When the prompt contains "fin de session", injects a system reminder that runs the end-of-session workflow: update memory, write an Obsidian note if relevant, commit/push the current project, then sync `dotclaude` and `dotclaude-private`.
+All wired through `settings.json`. Paths are personal (`/Users/valentin/Documents/RemoteCoffre/wiki/`) — adapt to your own vault.
+
+| Event | Purpose |
+|---|---|
+| `UserPromptSubmit` | `hooks/fin-de-session.sh` — when the prompt contains "fin de session", injects a system reminder that runs the end-of-session workflow: update memory, write an Obsidian note if relevant, commit/push the current project, then sync `dotclaude` and `dotclaude-private`. |
+| `PreToolUse` (Bash) | `rtk hook claude` — routes Bash calls through RTK, a token-optimizing CLI proxy. |
+| `SessionStart` (startup/resume) | Cats `wiki/hot.md` (a small recent-context cache) and silently re-prompts the model to load it. |
+| `PostCompact` | Re-reads `wiki/hot.md` after a context compaction, since hook-injected context does not survive compaction. |
+| `PostToolUse` (Write/Edit) | Auto-commits `wiki/`, `.raw/`, `.vault-meta/` in the vault repo with a timestamped message. |
+| `Stop` | If `wiki/` changed during the session, prints a `WIKI_CHANGED:` notice prompting an update of `hot.md`. |
